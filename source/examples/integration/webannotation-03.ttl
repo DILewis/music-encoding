@@ -1,0 +1,15 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+PREFIX oa: <http://www.w3.org/ns/oa#> .
+PREFIX dc: <http://purl.org/dc/elements/1.1/> .
+
+<http://example.org/LateSwallowsOpening> a oa:Annotation ;
+  oa:hasBody <http://example.org/DeliusInPerformance.tei#LateSwallowsOpening> ;
+  oa:hasTarget <http://example.org/LateSwallowsOpening-embodibag> .
+
+<http://example.org/LateSwallowsOpening-embodibag> a rdf:Bag
+  rdfs:member <http://example.org/Late-Swallows-opening.mei#beam-0000001487245486>,
+    <http://example.org/Late-Swallows-opening.mei#beam-0000001190316953>,
+    <http://example.org/Late-Swallows-opening.mei#slur-0000000513200250>,
+    <http://example.org/Late-Swallows-opening.mei#staff-0000001900404453>,
+    <http://example.org/Late-Swallows-opening.mei#staff-0000000541031031>,
+    <http://example.org/Late-Swallows-opening.mei#staff-0000001325424423> .

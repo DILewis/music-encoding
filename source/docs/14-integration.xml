@@ -277,6 +277,121 @@
                   </p>
                </div>
             </div>
+            <div xml:id="webAnnotations" type="div2">
+               <head>Web Annotations in Linked Data</head>
+               <p>Not all annotations will be made inside MEI documents. There are several
+                  reasons why this may be the case:</p>
+               <list rend="bulleted">
+                  <item>The annotations may be use in systems not designed exclusively 
+                     or primarily for music.</item>
+                  <item>The annotations may refer to multiple documents, not all of 
+                     which need be music (this could be achieved using MEI, but this
+                     may not be the best solution).</item>
+                  <item>The MEI may reside in files to which the annotator does not
+                     have write access, so creating annotations externally may be a
+                     simpler option.
+                  </item>
+               </list>
+               <p>In these cases, a strong option is to represent the annotations using 
+                  the Web Annotation model (<ref target="https://www.w3.org/TR/annotation-model/">
+                     https://www.w3.org/TR/annotation-model/</ref>). A simple way to think 
+                  of an annotation is as a vehicle for attaching information to an area of 
+                  interest in a document:</p>
+               <p>
+                  <figure>
+                     <head>Schematic representation of an annotation, showing information 
+                        being attached to an area of interest in a document.</head>
+                     <graphic url="../images/modules/shared/annotation.png"/>
+                  </figure>
+               </p>
+               <p>Thus, the two main components that concern us are: the information to be
+                  associated and the region of the document to which the annotation applies.
+                  In addition to these two components, there is the annotation itself, which 
+                  we will want to augment with information about its provenance – who made it
+                  and when, etc. – and perhaps about what sort of annotation it is, and how
+                  it should be interpreted.</p>
+               <p>This structure is made explicit in the Web Annotation model (see below, from
+                  <ref target="https://www.w3.org/TR/annotation-model/">
+                     https://www.w3.org/TR/annotation-model/</ref>). 
+                  In this model, the ‘area of interest’ is called a <hi rend="italic">Target</hi>
+                  (which can be anything with a URI). Information that is associated with a 
+                  Target by the Annotation is called a <hi rend="italic">Body</hi> (n.b. 
+                  capitalisation is used for the classes within the model; in the text below,
+                  we will use lower case when we use the concepts themselves). Annotations 
+                  can include information about motivation, and record who or what created 
+                  them.</p>
+               <p>
+                  <figure>
+                     <head>Core concepts of the Web Annotation Data Model</head>
+                     <graphic url="https://www.w3.org/TR/annotation-model/images/intro_model.png"></graphic>
+                  </figure>
+               </p>
+               <p>To include elements from an MEI document in the target of an annotation,
+                  the simplest case is if the file is published online and if the area of
+                  interest is a single element with an <att>xml:id</att>. This means that
+                  the element can be identified using the URL of its containing document
+                  followed by a fragment identifier consisting of a hash sign and the
+                  <att>xml:id</att> (in the example below, this is 
+                  http://example.org/Op26.mei#measure-21). As a result, the Web Annotation
+                  can be quite simple:</p>
+               <p>
+                  <figure>
+                     <head/>
+                     <eg rend="code noBase noLang" xml:space="preserve"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../examples/integration/webannotation-01.ttl" parse="text"/></eg>
+                  </figure>
+               </p>               
+               <p>To combine multiple elements as the targets, the URLs can be listed 
+                  separately.</p>
+               <p>
+                  <figure>
+                     <head/>
+                     <eg rend="code noBase noLang" xml:space="preserve"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../examples/integration/webannotation-02.ttl" parse="text"/></eg>
+                  </figure>
+               </p>
+               <p>This approach is used in practice by the MELD framework (see <ref 
+                  target="meld.web.ox.ac.uk">https://meld.web.ox.ac.uk</ref>). Musical
+                  elements that represent an embodiment of the music being referred to
+                  are grouped together in an ‘embodybag’ in the syntax:</p>
+               <p>
+                  <figure>
+                     <head/>
+                     <eg rend="code noBase noLang" xml:space="preserve"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../examples/integration/webannotation-03.ttl" parse="text"/></eg>
+                  </figure>
+               </p>
+               <p>Selection by metrical region (as is possible using EMA, <ref
+                  target="https://music-addressability.github.io/ema/api">
+                  https://music-addressability.github.io/ema/api</ref>) is not 
+                  currently supported.</p>
+               <div xml:id="webAnnotationsMAO" type="div3">
+                  <head>Annotations using the Music Annotation Ontology</head>
+                  <p>There is, conceptually, a difference between talking about a 
+                     musical phrase, which is an abstract concept, and the notes that
+                     represent it in an edition of a version of a musical work. This
+                     can be represented, at an abstract level, using the Music Annotation
+                     Ontology. The concepts modelled in this ontology can be used as
+                     targets for annotations and, their constituent elements specified 
+                     using the Selection object within the ontology.</p>
+                  <p>
+                     <figure>
+                        <head/>
+                        <eg rend="code noBase noLang" xml:space="preserve"><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="../examples/integration/webannotation-04.ttl" parse="text"/></eg>
+                     </figure>
+                  </p>
+                  <p>Since the same pointing mechanism is used as for Web Annotations for
+                     specifying regions of the MEI document, metrical regions are not 
+                     currently supported.</p>
+               </div>
+               <div xml:id="webAnnotationsAnnot" type="div3">
+                  <head>Combining Web Annotations with annot</head>
+                  <p>Either simple web annotations or web annotations with MAO can have 
+                  <gi scheme="MEI">annot</gi> as their target (see <ptr 
+                  target="#sharedAnnotations"/>. This allows them to take advantage of 
+                  the advanced targeting power of MEI control events, but reduces the 
+                  separation of concerns between the MEI document and the annotation (since
+                  the <gi scheme="MEI">annot</gi> has to be present in an encoding before
+                  it can be used as a target).</p>
+               </div>
+            </div>
          </div>
       </body>
    </text>

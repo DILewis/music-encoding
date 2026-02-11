@@ -1,0 +1,23 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+PREFIX oa: <http://www.w3.org/ns/oa#> .
+PREFIX mao: <https://w3id.org/music-annotation/1.0/> .
+
+<http://example.org/Beethoven-Op93-stacc> a oa:Annotation
+  oa:hasBody [
+    a oa:TextualBody ;
+    rdf:value "Distinctive texture with staccato bassoon"
+  ] ;
+  oa:hasTarget <http://example.org/Op93BassoonStaccatoExtract> .
+
+<http://example.org/Op93BassoonStaccatoExtract> a mao:Extract ;
+  rdfs:member <http://example.org/Op93BassoonScoreSelection>,
+    <http://example.org/Op93BassoonMacKerrasSelection> .
+
+<http://example.org/Op93BassoonScoreSelection> a mao:Selection ;
+  frbr:part <http://example.org/C93-30_Partitur.mei#staff-36-fg> ,
+    <http://example.org/C93-30_Partitur.mei#staff-37-fg> ,
+    [...]
+    <http://example.org/C93-30_Partitur.mei#staff-44-fg> .
+
+<http://example.org/Op93BassoonMacKerrasSelectiont> a mao:Selection ;
+  frbr:part <http://example.org/MackerrasOp93.mp3#t=45,60> .

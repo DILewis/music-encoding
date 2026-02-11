@@ -1,0 +1,10 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+PREFIX oa: <http://www.w3.org/ns/oa#> .
+PREFIX dc: <http://purl.org/dc/elements/1.1/> .
+
+<http://example.org/anno1> a oa:Annotation;
+  oa:hasBody [
+      a oa:TextualBody;
+      rdf:value "This bar is a quotation from Op. 21"@en ;
+      dc:language "en" ];
+  oa:hasTarget <http://example.org/Op26.mei#measure-21> .
